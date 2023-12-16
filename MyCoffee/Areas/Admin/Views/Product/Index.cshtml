@@ -1,0 +1,193 @@
+﻿@using MyCoffee.BL.Models
+@model MyCoffee.BL.Models.IndexCreateVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Layout.cshtml";
+}
+
+   <section class="content">
+      <div class="container-fluid">
+          <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#exampleModal">
+    Create Product
+</button>
+
+<!-- Your modal code for creating a new category -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Render the CreateCategory partial view -->
+               <form  enctype="multipart/form-data" asp-controller="Product" asp-action="Create" method="post">
+            <div class="text-danger" asp-validation-summary=All></div>
+          <div class="form-group">
+            
+   <div class="mb-3">
+        <label asp-for=@Model.Product.Name class="form-label">Product Name</label>
+        <input type="text" class="form-control" id="Name" asp-for=@Model.Product.Name \>
+        <span class="text-danger" asp-validation-for="@Model.Product.Name"> </span>
+        <br />
+        <label asp-for=@Model.Product.Price class="form-label">Product Price</label>
+        <input type="number" class="form-control" id="Price" asp-for=@Model.Product.Price \>
+        <span class="text-danger" asp-validation-for="@Model.Product.Price"> </span>
+     
+       
+        <br />
+     
+
+        <br />
+        <label asp-for=@Model.Product.Description class="form-label">Product Description</label>
+        <textarea class="form-control" id="Description" asp-for=@Model.Product.Description> insert your Description</textarea>
+        <span class="text-danger" asp-validation-for="@Model.Product.Description"> </span>
+
+        <br />
+        <label asp-for=@Model.Product.CategoryId class="form-label"> Category</label>
+
+@*        <select asp-items=(SelectList)ViewBag.CategoryList class="form-control" id="CategoryId" asp-for=CategoryId>
+             <select asp-items=(SelectList)@ViewData["CategoryList"] class="form-control" id="CategoryId" asp-for=CategoryId>
+                 <select asp-items="(SelectList)selectListData" class="form-control" id="CategoryId" asp-for=CategoryId>
+*@
+@*                    @Html.DropDownListFor( Model.CategoryId ,(SelectList)ViewBag.CategoryList, "Select Category", new { @class = "form-control" })
+*@
+            <select asp-items=(SelectList)ViewBag.CategoryList class="form-control" id="CategoryId" asp-for=@Model.Product.CategoryId>
+
+            <option>choose CategoryName</option>
+
+
+        </select>
+        <span class="text-danger" asp-validation-for="@Model.Product.CategoryId"> </span>
+        <br />
+       
+
+        <label asp-for=@Model.Product.PhotoUrl class="form-label">Product Photo</label>
+        <input type="file" class="form-control" id="PhotoUrl" asp-for=@Model.Product.PhotoUrl \>
+        <span class="text-danger" asp-validation-for="@Model.Product.PhotoUrl"> </span>
+        
+     
+    </div>
+          </div>
+           <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+        </form >
+
+            </div>
+            <!-- Your modal footer -->
+        </div>
+    </div>
+
+    </div>
+        <div class="row">
+          <div class="col-12">
+               <br />
+             <br />
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              </div>
+<div class="card-body">
+                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"><div class="dt-buttons btn-group flex-wrap">    
+                   
+                      
+                            </div> </div></div><div class="col-sm-12 col-md-6"></div><div class="row"><div class="col-sm-12">
+                                <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                  <thead>
+                  <tr role="row">
+                      <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Name</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Photo</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Price</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Description</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Publish_Date</th>
+                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Category Name</th>
+                                                                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Is Active</th>
+
+                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Edite</th>
+                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Delete</th>
+                  
+
+
+   </tr>
+                  </thead>
+                  <tbody>
+              
+                   @foreach (var i in Model.Products)
+                  {
+                      
+                 
+              <tr class="odd">
+                 
+                    <td class="dtr-control sorting_1" tabindex="0">@i.Name</td>
+                    @if (i.Photo=="null")
+                    {
+                        <td><img src="~/Photo/noimage.PNG" width=50 height=50 /></td>
+                    }else{
+                         <td><img src="~/Photo/@i.Photo" width=50 height=50 /></td>
+                    }
+                    
+                    <td>@i.Price</td>
+                    <td>@i.Description</td>
+                    <td>@i.Publish_Date</td>
+                    <td>@i.category.Name</td>
+                    @if (@i.IsActive==true)
+                    {
+                        <td><div style="padding: 10px;border: 1px solid;cursor: pointer">
+                                                <span class="legend-indicator bg-success"></span>Active
+                                            </div></td>
+                    }else{
+                    <td><div style="padding: 10px;border: 1px solid;cursor: pointer">
+                                                <span class="legend-indicator bg-success"></span>Disabled
+                                            </div></td>}
+                    <td><a class="btn btn-success" asp-action=Edite asp-area=Admin asp-controller=Product asp-route-id=@i.Id>Edite</a></td>
+                    <td><a class="btn btn-danger" asp-action=Delete asp-area=Admin asp-controller=Product asp-route-id=@i.Id>Delete</a></td>
+                </tr>
+               }
+                </tbody>
+                </table>
+              </div>
+              </div>
+              </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      </div>
+      </div>
+      </div>
+      
+      <!-- /.container-fluid -->
+    </section>
+    @section table{
+    <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+     $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('Add New Product' )
+  modal.find('.modal-body input').val(recipient)
+})
+</script>}
+

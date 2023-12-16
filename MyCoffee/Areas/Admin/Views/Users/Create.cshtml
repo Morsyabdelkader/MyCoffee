@@ -1,0 +1,46 @@
+﻿@model MyCoffee.BL.Models.RoleVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Layout.cshtml";
+}
+
+
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+              <br />
+<h2>Create New Role</h2>
+
+<form asp-area=Admin  asp-controller=Users asp-action=Create method="post">
+     <div class="text-danger" asp-validation-summary=All></div>
+    <div class="mb-3">
+        <label asp-for=Name class="form-label">Role Name</label>
+        <input type="text" class="form-control" id="Name" asp-for=Name \>
+        <span class="text-danger" asp-validation-for="Name"> </span>
+        <br />
+       
+    </div>
+
+    
+    <center>
+        <input type="submit" class="btn btn-primary" />
+        <br />
+        <br />
+    </center>
+    
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+
+
+

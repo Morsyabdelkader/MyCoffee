@@ -1,0 +1,125 @@
+﻿@using MyCoffee.BL.Models
+@model IEnumerable<MyCoffee.BL.Models.CategoryVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Layout.cshtml";
+}
+
+   <section class="content">
+      <div class="container-fluid">
+
+   
+
+<!-- Your existing code for displaying categories -->
+
+<!-- Button to open the modal -->
+<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#exampleModal">
+    Create Category
+</button>
+
+<!-- Your modal code for creating a new category -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Render the CreateCategory partial view -->
+                @{ await Html.RenderPartialAsync("_CreateCategory", new CategoryVM()); }
+            </div>
+            <!-- Your modal footer -->
+        </div>
+    </div>
+
+    </div>
+   
+  
+        <div class="row">
+
+          <div class="col-12">
+               <br />
+             <br />
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              </div>
+<div class="card-body">
+                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"><div class="dt-buttons btn-group flex-wrap">    
+                   
+                      
+                            </div> </div></div><div class="col-sm-12 col-md-6"></div><div class="row"><div class="col-sm-12">
+                                <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                  <thead>
+                  <tr role="row">
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Id</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Name</th>
+
+                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Edite</th>
+                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Delete</th>
+                  
+
+
+   </tr>
+                  </thead>
+                  <tbody>
+              @foreach (var item in Model ){
+              <tr class="odd">
+                    <td class="dtr-control sorting_1" tabindex="0">@item.Id</td>
+                  
+                    
+                    <td>@item.Name</td>
+                  
+                    <td><a class="btn btn-success" asp-action=Edite asp-area=Admin asp-controller=Category asp-route-id=@item.Id>Edite</a></td>
+                    <td><a class="btn btn-danger" asp-action=Delete asp-area=Admin asp-controller=Category asp-route-id=@item.Id>Delete</a></td>
+                </tr>
+              }
+                </tbody>
+                </table>
+              </div>
+              </div>
+              </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      </div>
+      </div>
+      </div>
+      
+      <!-- /.container-fluid -->
+    </section>
+    @section table{
+    <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+    $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('Add New Category' )
+  modal.find('.modal-body input').val(recipient)
+})
+
+</script>}
+
+

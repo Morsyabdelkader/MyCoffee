@@ -1,0 +1,433 @@
+﻿@model MyCoffee.BL.Models.OrderDetailsVM
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Layout.cshtml";
+}
+
+<main id="content" role="main" class="main pointer-event">
+    <!-- Content -->
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header d-print-none">
+            <div class="row align-items-center">
+                <div class="col-sm mb-2 mb-sm-0">
+                    
+
+                    <div class="d-sm-flex align-items-sm-center">
+                        <h1 class="page-header-title">Order #@Model.OrderId</h1>
+
+                                                   
+                                                <span class="ml-2 ml-sm-3">
+                        <i class="tio-date-range"></i> @Model.OrderDate
+                </span>
+
+                    </div>
+
+                    <div class="mt-2">
+                       
+
+                       
+                        
+
+
+                        
+                       
+                        <!-- End Unfold -->
+                    </div>
+                                            <div class="mt-2">
+                            <div class="hs-unfold">
+                                <span>Delivery Date:</span>
+                            </div>
+                            <div class="hs-unfold ml-4">
+
+                                <h2>@Model.ShippingDate.Date</h2>
+
+                            </div>
+                            
+                        </div>
+                                    </div>
+
+                <div class="col-sm-auto">
+                    <a class="btn btn-icon btn-sm btn-ghost-secondary rounded-circle mr-1"
+                       href="https://goonkora.com/admin/orders/details/100007"
+                       data-toggle="tooltip" data-placement="top" title="Previous order">
+                        <i class="tio-arrow-backward"></i>
+                    </a>
+                    <a class="btn btn-icon btn-sm btn-ghost-secondary rounded-circle"
+                       href="https://goonkora.com/admin/orders/details/100009" data-toggle="tooltip"
+                       data-placement="top" title="Next order">
+                        <i class="tio-arrow-forward"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Header -->
+
+        <div class="row" id="printableArea">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <!-- Card -->
+                <div class="card mb-3 mb-lg-5">
+                    <!-- Header -->
+                    <div class="card-header" style="display: block!important;">
+                        <div class="row">
+                            <div class="col-12 pb-2 border-bottom">
+                                <h4 class="card-header-title">
+                                    Order Details
+                                    <span
+                                        class="badge bg-secondary rounded-circle ml-1">@Model.OrderDetails.Count()</span>
+                                </h4>
+                            </div>
+                            <div class="col-6 pt-2">
+                                <h6 style="color: #8a8a8a;">
+                                    Order Note
+                                    : 
+                                </h6>
+                            </div>
+                            <div class="col-6 pt-2">
+                                <div class="text-right">
+                                    <h6 class="text-capitalize" style="color: #8a8a8a;">
+                                        Payment Method
+                                        : cash on delivery
+                                    </h6>
+                                    <h6 class="" style="color: #8a8a8a;">
+                                                                                    Reference Code
+                                            :
+                                            <button class="btn btn-outline-primary btn-sm" data-toggle="modal"
+                                                    data-target=".bd-example-modal-sm">
+                                                Add
+                                            </button>
+                                                                            </h6>
+                                    <h6 class="text-capitalize"
+                                        style="color: #8a8a8a;">Order Type
+                                        : <label style="font-size: 10px"
+                                                 class="badge badge-soft-primary">delivery</label>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                                                                                                                                    <!-- Media -->
+                                
+                                    @foreach (var item in @Model.Product)
+                                    {
+                                        <div class="media">
+                                   
+                                    <div class="avatar avatar-xl mr-3">
+                                        @if(item.Photo=="null"){<img class="img-fluid" width=75 height=75
+                                             src="~/Photo/noimage.PNG"
+                                             
+                                             alt="Image Description">
+                                    }else{
+                                         <img class="img-fluid" width=75 height=75
+                                             src="~/Photo/@item.Photo"
+                                             
+                                             alt="Image Description">
+                                    }
+
+                                       
+                                    </div>
+
+                                    <div class="media-body" style="margin-top:10px">
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3 mb-md-0">
+                                                <strong> @item.Name</strong><br>
+                                                                                                   
+                                                    
+                                                                                                           
+                                                                                                    
+                                            </div>
+
+                                            <div class="col col-md-2 align-self-center">
+
+                                                <h6>@item.Price جنيه‏</h6>
+                                            </div>
+                
+                                            <div class="col col-md-2 align-self-center">
+                                                <h5>@Model.ProductQuantities[item.Id] </h5>
+                                            </div>
+        
+                                           
+
+                                            @*<div class="col col-md-2 align-self-center">
+                                                <h5>1 قطعه</h5>
+                                            </div>*@
+
+
+                                            <div class="col col-md-3 align-self-center text-right">
+                                                                                                <h5> @(Model.ProductQuantities[item.Id] * item.Price)جنيه</h5>
+                                            </div>
+                                        </div>
+                                    </div></div>
+                                     }
+                                
+                                                                                    <!-- End Media -->
+                                <hr>
+                                                    
+                        <div class="row justify-content-md-end mb-3">
+                            <div class="col-md-9 col-lg-8">
+                                <dl class="row text-sm-right">
+                                    <dt class="col-sm-6">Items Price
+                                        :
+                                    </dt>
+                                    <dd class="col-sm-6">@(Model.TotalPrice)جنيه‏</dd>
+                                    <dt class="col-sm-6">Tax
+                                        / Vat:
+                                    </dt>
+                                    <dd class="col-sm-6">0.00جنيه‏</dd>
+
+                                    <dt class="col-sm-6">Subtotal:</dt>
+                                    <dd class="col-sm-6">
+                                        @(Model.TotalPrice)جنيه‏</dd>
+                                    <dt class="col-sm-6">Coupon Discount
+                                        :
+                                    </dt>
+                                    <dd class="col-sm-6">
+                                        - 0.00جنيه‏</dd>
+                                                                        <dt class="col-sm-6">Delivery Fee
+                                        :
+                                    </dt>
+                                    <dd class="col-sm-6">
+                                                                                                                                                                    0.00جنيه‏
+                                        <hr>
+                                    </dd>
+
+                                    <dt class="col-sm-6">Total:</dt>
+                                    <dd class="col-sm-6">@(Model.TotalPrice)جنيه‏</dd>
+                                </dl>
+                                <!-- End Row -->
+                            </div>
+                        </div>
+                        <!-- End Row -->
+                    </div>
+                    <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+
+                        <div class="col-lg-4">
+                <!-- Card -->
+                <div class="card">
+                    <!-- Header -->
+                    <div class="card-header">
+                        <h4 class="card-header-title">Customer</h4>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                        <div class="card-body">
+                            <div class="media align-items-center" href="javascript:">
+                                <div class="avatar avatar-circle mr-3">
+                                    <img
+                                        class="avatar-img" style="width: 75px;border-radius: 50%; "
+                                        onerror="this.src='https://goonkora.com/public/assets/admin/img/160x160/img1.jpg'"
+                                        src="~/Photo/@Model.identity.Photo"
+                                        alt="Image Description">
+                                </div>
+                                <div class="media-body">
+                                <span
+                                    class="text-body text-hover-primary">@Model.identity.UserName</span>
+                                </div>
+                                <div class="media-body text-right">
+                                    
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="media align-items-center" href="javascript:">
+                                <div class="icon icon-soft-info icon-circle mr-3">
+                                    <img src="~/images/shopping-cart.png" width=50 height=50/>
+                                </div>
+                                <div class="media-body">
+                                    <span class="text-body text-hover-primary">@Model.OrderCount orders</span>
+                                </div>
+                                <div class="media-body text-right">
+                                    
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5>Contact Info</h5>
+                            </div>
+
+                            <ul class="list-unstyled list-unstyled-py-2">
+                                <li>
+                                    <i class="tio-online mr-2"></i>
+                                    @Model.identity.Email
+                                </li>
+                                <li>
+                                    <i class="tio-android-phone-vs mr-2"></i>
+                                    @Model.PhoneNumber
+                                </li>
+                            </ul>
+
+                                                            <hr>
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5>Delivery Address</h5>
+                                                                            <a class="link" data-toggle="modal" data-target="#shipping-address-modal"
+                                           href="javascript:">Edit</a>
+                                                                    </div>
+                                                                    <span class="d-block">
+                                    @Model.identity.UserName<br>
+                                    @Model.PhoneNumber<br>
+                                    Home<br>
+                                    <a target="_blank"
+                                       href="#">
+                                       <i class="tio-map"></i> @Model.identity.Address , @Model.identity.City , @Model.identity.State<br>
+                                    </a>
+                                </span>
+                                                                                    </div>
+                <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+                    </div>
+        <!-- End Row -->
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title h4"
+                        id="mySmallModalLabel">Reference Code Add</h5>
+                    <button type="button" class="btn btn-xs btn-icon btn-ghost-secondary" data-dismiss="modal"
+                            aria-label="Close">
+                        <i class="tio-clear tio-lg"></i>
+                    </button>
+                </div>
+
+                <form action="https://goonkora.com/admin/orders/add-payment-ref-code/100008" method="post">
+                    <input type="hidden" name="_token" value="n72ThF95UtsrYWlbWEGmimM1g9t4pgVZ5opY6OM3">                    <div class="modal-body">
+                        <!-- Input Group -->
+                        <div class="form-group">
+                            <input type="text" name="transaction_reference" class="form-control"
+                                   placeholder="EX : Code123" required>
+                        </div>
+                        <!-- End Input Group -->
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Modal -->
+    <div id="shipping-address-modal" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalTopCoverTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <!-- Header -->
+                <div class="modal-top-cover bg-dark text-center">
+                    <figure class="position-absolute right-0 bottom-0 left-0" style="margin-bottom: -1px;">
+                        <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                             viewBox="0 0 1920 100.1">
+                            <path fill="#fff" d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"/>
+                        </svg>
+                    </figure>
+
+                    <div class="modal-close">
+                        <button type="button" class="btn btn-icon btn-sm btn-ghost-light" data-dismiss="modal"
+                                aria-label="Close">
+                            <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="currentColor"
+                                      d="M11.5,9.5l5-5c0.2-0.2,0.2-0.6-0.1-0.9l-1-1c-0.3-0.3-0.7-0.3-0.9-0.1l-5,5l-5-5C4.3,2.3,3.9,2.4,3.6,2.6l-1,1 C2.4,3.9,2.3,4.3,2.5,4.5l5,5l-5,5c-0.2,0.2-0.2,0.6,0.1,0.9l1,1c0.3,0.3,0.7,0.3,0.9,0.1l5-5l5,5c0.2,0.2,0.6,0.2,0.9-0.1l1-1 c0.3-0.3,0.3-0.7,0.1-0.9L11.5,9.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <!-- End Header -->
+
+                <div class="modal-top-cover-icon">
+                    <span class="icon icon-lg icon-light icon-circle icon-centered shadow-soft">
+                      <i class="tio-location-search"></i>
+                    </span>
+                </div>
+
+                                                    <form action="https://goonkora.com/admin/order/update-shipping/9"
+                          method="post">
+                        <input type="hidden" name="_token" value="n72ThF95UtsrYWlbWEGmimM1g9t4pgVZ5opY6OM3">                        <div class="modal-body">
+                            <div class="row mb-3">
+                                <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
+                                    Type
+                                </label>
+                                <div class="col-md-10 js-form-message">
+                                    <input type="text" class="form-control" name="address_type"
+                                           value="Home" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
+                                    Contact
+                                </label>
+                                <div class="col-md-10 js-form-message">
+                                    <input type="text" class="form-control" name="contact_person_number"
+                                           value="+201097350334" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
+                                    Name
+                                </label>
+                                <div class="col-md-10 js-form-message">
+                                    <input type="text" class="form-control" name="contact_person_name"
+                                           value="Hany Zaza" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
+                                    Address
+                                </label>
+                                <div class="col-md-10 js-form-message">
+                                    <input type="text" class="form-control" name="address"
+                                           value="9 حارة أبو جميله، العزب، قسم الشرابية، محافظة القاهرة‬ 4361213، مصر قسم الشرابية EG"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
+                                    Latitude
+                                </label>
+                                <div class="col-md-4 js-form-message">
+                                    <input type="text" class="form-control" name="latitude"
+                                           value="30.085750956855474"
+                                           required>
+                                </div>
+                                <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
+                                    Longitude
+                                </label>
+                                <div class="col-md-4 js-form-message">
+                                    <input type="text" class="form-control" name="longitude"
+                                           value="31.261702291667465" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white"
+                                    data-dismiss="modal">Close</button>
+                            <button type="submit"
+                                    class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                            </div>
+        </div>
+    </div>
+
+
+
+    
+    
+    </main>
+   
+    <!-- End Modal -->
+<!-- End Content -->

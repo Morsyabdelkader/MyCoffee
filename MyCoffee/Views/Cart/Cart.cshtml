@@ -1,0 +1,85 @@
+﻿@using MyCoffee.Models
+@model List<ProductVM>
+
+@using MyCoffee.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Order Details";
+}
+@{
+
+    List<ProductVM> products = HttpContextAccessor.HttpContext.Session.Get<List<ProductVM>>("Products");
+   
+    
+
+}
+@{
+    ViewData["Title"] = "Cart";
+}
+<h1>Your Cart</h1>
+
+<br/>
+@if (products!=null&&products.Count!=0)
+        {
+            
+
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+           
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/Photo/@item.Photo" width="200px" height="150px"/>
+                </td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td style="text-align:center"><a asp-action="plus" asp-route-id="@item.Id" asp-controller="Cart"><img width="64" height="64" src="https://img.icons8.com/cotton/64/plus--v2.png" alt="plus--v2"/></a><div style="margin:5px">@item.Quantity</div><a  asp-action="mins" asp-route-id="@item.Id" asp-controller="Cart"> <img width="64" height="64" src="https://img.icons8.com/cotton/64/minus--v3.png" alt="minus--v3"/></a></td>
+
+                
+                
+                <td>
+                    <a asp-area="Customer" asp-action="Remove" asp-controller="Cart" asp-route-id="@item.Id" class="btn btn-danger">
+                        Remove
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-6">
+        <a asp-action="Index" asp-controller="Home" class="btn btn-success">Back to Home</a>
+    </div>
+    <div class="col-6 text-right">
+        <h3>Total Amount</h3>
+        <h3>Grant Total : @Model.Sum(c=>c.Price*c.Quantity) </h3>
+        
+                    <a  asp-action="CheckOut" asp-controller="Order" class="btn btn-info">Process to Checkout</a>
+
+       
+    </div>
+</div>
+
+
+}else{
+<div class="row">
+    <div class="col-12"style="height:369px" >
+
+        <h1 style="text-align:center">The Cart Is Empty</h1>
+    </div>
+
+
+</div>
+}

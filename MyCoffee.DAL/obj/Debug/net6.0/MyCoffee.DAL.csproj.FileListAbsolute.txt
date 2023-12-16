@@ -1,0 +1,14 @@
+C:\Users\Pc\source\repos\MyCoffee.DAL\bin\Debug\net6.0\MyCoffee.DAL.deps.json
+C:\Users\Pc\source\repos\MyCoffee.DAL\bin\Debug\net6.0\MyCoffee.DAL.runtimeconfig.json
+C:\Users\Pc\source\repos\MyCoffee.DAL\bin\Debug\net6.0\MyCoffee.DAL.dll
+C:\Users\Pc\source\repos\MyCoffee.DAL\bin\Debug\net6.0\MyCoffee.DAL.pdb
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\MyCoffee.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\MyCoffee.DAL.AssemblyInfoInputs.cache
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\MyCoffee.DAL.AssemblyInfo.cs
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\MyCoffee.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\MyCoffee.DAL.dll
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\ref\MyCoffee.DAL.dll
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\MyCoffee.DAL.pdb
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\MyCoffee.DAL.genruntimeconfig.cache
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\MyCoffee.DAL.csproj.AssemblyReference.cache
+C:\Users\Pc\source\repos\MyCoffee.DAL\obj\Debug\net6.0\refint\MyCoffee.DAL.dll

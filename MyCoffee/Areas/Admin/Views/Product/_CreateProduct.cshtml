@@ -1,0 +1,62 @@
+﻿@model MyCoffee.Models.ProductVM
+
+ <form asp-controller="Product" asp-action="Create" method="post">
+            <div class="text-danger" asp-validation-summary=All></div>
+          <div class="form-group">
+            
+   <div class="mb-3">
+        <label asp-for=Name class="form-label">Product Name</label>
+        <input type="text" class="form-control" id="Name" asp-for=Name \>
+        <span class="text-danger" asp-validation-for="Name"> </span>
+        <br />
+        <label asp-for=Price class="form-label">Product Price</label>
+        <input type="text" class="form-control" id="Price" asp-for=Price \>
+        <span class="text-danger" asp-validation-for="Price"> </span>
+     
+       
+        <br />
+        <br />
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" asp-for="IsActive" id="IsActive" checked>
+            <label class="form-check-label" asp-for=IsActive>
+                Product IsActive
+            </label>
+            <span class="text-danger" asp-validation-for="IsActive"> </span>
+
+        </div>
+        <br />
+        <label asp-for=Description class="form-label">Product Description</label>
+        <textarea class="form-control" id="Description" asp-for=Description> insert your Description</textarea>
+        <span class="text-danger" asp-validation-for="Description"> </span>
+
+        <br />
+        <label asp-for=CategoryId class="form-label"> Category</label>
+
+@*        <select asp-items=(SelectList)ViewBag.CategoryList class="form-control" id="CategoryId" asp-for=CategoryId>
+             <select asp-items=(SelectList)@ViewData["CategoryList"] class="form-control" id="CategoryId" asp-for=CategoryId>
+                 <select asp-items="(SelectList)selectListData" class="form-control" id="CategoryId" asp-for=CategoryId>
+*@
+@*                    @Html.DropDownListFor( Model.CategoryId ,(SelectList)ViewBag.CategoryList, "Select Category", new { @class = "form-control" })
+*@
+            <select asp-items=(SelectList)ViewBag.CategoryList class="form-control" id="CategoryId" asp-for=CategoryId>
+
+            <option>choose CategoryName</option>
+
+
+        </select>
+        <span class="text-danger" asp-validation-for="CategoryId"> </span>
+        <br />
+       
+
+        <label asp-for=PhotoUrl class="form-label">Product Photo</label>
+        <input type="file" class="form-control" id="PhotoUrl" asp-for=PhotoUrl \>
+        <span class="text-danger" asp-validation-for="PhotoUrl"> </span>
+        
+     
+    </div>
+          </div>
+           <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+        </form >

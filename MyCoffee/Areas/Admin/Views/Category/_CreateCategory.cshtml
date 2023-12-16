@@ -1,0 +1,18 @@
+﻿@model MyCoffee.BL.Models.CategoryVM
+ <form asp-controller="Category" asp-action="Create" method="post">
+            <div class="text-danger" asp-validation-summary=All></div>
+          <div class="form-group">
+            
+    <div class="mb-3">
+        <label asp-for=Name class="form-label">Category Name</label>
+        <input type="text" class="form-control" id="Name" asp-for=Name \>
+        <span class="text-danger" asp-validation-for="Name"> </span>
+        <br />
+       
+    </div>
+          </div>
+           <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+        </form >
